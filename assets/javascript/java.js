@@ -1,19 +1,17 @@
-//------NY TIMES
-// App ID      1deb8316-b9cc-49b8-b0b9-114a9eed31d4
-// API Key 76MLUOUhu8ALZ2Y8BCj6gA5pGcglP951	
-
+//------NY TIMES--------------------------------------------//
 
 function buildQueryURL() {
+    //Query build for NYTimes API.  Parameters commented out are for follow on development
+    //after building MVP
 
     var queryURL = "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?";
     var queryParams = { "api-key": "76MLUOUhu8ALZ2Y8BCj6gA5pGcglP951" };
-    
+
     // Grab text the user typed into the search input, add to the queryParams object
     //   queryParams.q = $("#search-term")
     //  .val()
     //  .trim();
-
-    // If the user provides a startYear, include it in the queryParams object
+ 
     // var startYear = $("#start-year")
     //  .val()
     //  .trim();
@@ -22,7 +20,6 @@ function buildQueryURL() {
     //  queryParams.begin_date = startYear + "0101";
     // }
 
-    // If the user provides an endYear, include it in the queryParams object
     //var endYear = $("#end-year")
     //  .val()
     //  .trim();
@@ -37,16 +34,10 @@ function buildQueryURL() {
     return queryURL + $.param(queryParams);
 }
 
-
-//function updatePage(NYTData) {
-//    console.log(NYTData);
-//    console.log("------------------------------------");
-//}
-
-
+//getArticles.  Articles returned in 'response' object
 function getArticles() {
     var queryURL = buildQueryURL();
-    console.log("getArticles : " +queryURL);
+    console.log("getArticles : " + queryURL);
 
     $.ajax({
         url: queryURL,
@@ -56,12 +47,10 @@ function getArticles() {
     })
 }
 
-
+//Call getArticles when page loads
 $(document).ready(function () {
     console.log("ready");
     getArticles();
-    
-
 })
 
 
