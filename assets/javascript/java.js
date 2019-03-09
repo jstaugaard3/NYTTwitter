@@ -27,7 +27,12 @@ function getArticles() {
     }).then(function (response) {
         console.log(response);
         headline1 = response.results[0].title;
-        console.log("Headline 1 :"+headline1);
+        $("#article1").text(response.results[0].title);
+        $("#article2").text(response.results[1].title);
+        $("#article3").text(response.results[2].title);
+        $("#article4").text(response.results[3].title);
+        $("#article5").text(response.results[4].title);
+
         getGiphys();
     })
 
