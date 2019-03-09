@@ -10,9 +10,6 @@ function buildQueryURL() {
     var queryURL = "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?";
     var queryParams = { "api-key": "76MLUOUhu8ALZ2Y8BCj6gA5pGcglP951" };
 
-    // Logging the URL so we have access to it for troubleshooting
-    console.log("---------------\nURL: " + queryURL + "\n---------------");
-    console.log(queryURL + $.param(queryParams));
     return queryURL + $.param(queryParams);
 }
 
@@ -43,8 +40,7 @@ function getGiphys(hl) {
   // Build query
   //var animalToGet = $(this).attr("data-name");
   var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HeHkAiN21cAfgDt2c1HZzCPq0GE9yKyj&limit=10&offset=0&rating=G&lang=en&q=" + hl;
-    console.log("In Giphy Headline 1 : " + headline1);
-
+  
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -54,8 +50,14 @@ function getGiphys(hl) {
     for (var i = 0; i < gifs.data.length; i++) {
 
       var imgURL = gifs.data[i].images.fixed_height.url;
-      console.log(imgURL);
 
+      var newsPic = $("<img class='card-img-top gif'>").attr({
+        src: imgURL
+      });
+      j=i+1
+      $("#giphyContainer"+j).empty();
+      $("#giphyContainer"+j).append(newsPic);
+      
     } // end loop through array of gifs
 })
 
@@ -63,7 +65,6 @@ function getGiphys(hl) {
 
 //Call getArticles and Giphys when page loads----------??
 $(document).ready(function () {
-    console.log("ready");
     getArticles();
 })
 
