@@ -32,7 +32,6 @@ function getArticles() {
         $("#article3").text(response.results[2].title);
         $("#article4").text(response.results[3].title);
         $("#article5").text(response.results[4].title);
-
         getGiphys();
     })
 
@@ -69,3 +68,9 @@ $(document).ready(function () {
 
 
 })
+
+
+$(document).on('click', '.btn', function () {
+  console.log($(this.textcontent));
+
+});
