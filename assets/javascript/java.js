@@ -39,10 +39,10 @@ function getArticles() {
 
 //--------GIPHY--------------------------------------//
 
-function getGiphys() {
+function getGiphys(hl) {
   // Build query
   //var animalToGet = $(this).attr("data-name");
-  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HeHkAiN21cAfgDt2c1HZzCPq0GE9yKyj&limit=10&offset=0&rating=G&lang=en&q=" + headline1;
+  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HeHkAiN21cAfgDt2c1HZzCPq0GE9yKyj&limit=10&offset=0&rating=G&lang=en&q=" + hl;
     console.log("In Giphy Headline 1 : " + headline1);
 
   $.ajax({
@@ -65,12 +65,11 @@ function getGiphys() {
 $(document).ready(function () {
     console.log("ready");
     getArticles();
-
-
 })
 
 
 $(document).on('click', '.btn', function () {
-  console.log($(this.textcontent));
-
+  headline1 = $(this).text();
+  console.log(headline1);
+  getGiphys(headline1);
 });
