@@ -56,3 +56,16 @@ $(document).ready(function () {
 
 
 
+//
+
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDXpFI9G8cr47mpFzj9n7fA8ugEuBeU9Og",
+    authDomain: "nytgiphy.firebaseapp.com",
+    databaseURL: "https://nytgiphy.firebaseio.com",
+    projectId: "nytgiphy",
+    storageBucket: "nytgiphy.appspot.com",
+    messagingSenderId: "964063517515"
+  };
+  firebase.initializeApp(config);
