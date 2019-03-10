@@ -73,6 +73,7 @@ $(document).on('click', '.btn', function () {
   headline1 = $(this).text();
   console.log(headline1);
   getGiphys(headline1);
+
 });
 
  // Initialize Firebase
