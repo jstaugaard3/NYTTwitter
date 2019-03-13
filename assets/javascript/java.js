@@ -1,6 +1,7 @@
 //------NY TIMES--------------------------------------------//
 
 var headline1 = "";
+var imgURL = "";
 
 
 function buildQueryURL() {
@@ -39,7 +40,7 @@ function getArticles() {
 function getGiphys(hl) {
   // Build query
   //var animalToGet = $(this).attr("data-name");
-  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HeHkAiN21cAfgDt2c1HZzCPq0GE9yKyj&limit=10&offset=0&rating=G&lang=en&q=" + hl;
+  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HeHkAiN21cAfgDt2c1HZzCPq0GE9yKyj&limit=6&offset=0&rating=G&lang=en&q=" + hl;
   
   $.ajax({
     url: queryURL,
@@ -49,7 +50,7 @@ function getGiphys(hl) {
     // Loop through the gifs
     for (var i = 0; i < gifs.data.length; i++) {
 
-      var imgURL = gifs.data[i].images.fixed_height.url;
+      imgURL = gifs.data[i].images.fixed_height.url;
 
       var newsPic = $("<img class='card-img-top gif'>").attr({
         src: imgURL
@@ -76,6 +77,11 @@ $(document).on('click', '.btn', function () {
 
 });
 
+// $(document).on('click', '.gif', function (e) {
+//   console.log(e.currentTarget.getAttribute("src"));
+
+// });
+
  // Initialize Firebase
  var config = {
   apiKey: "AIzaSyDXpFI9G8cr47mpFzj9n7fA8ugEuBeU9Og",
@@ -90,18 +96,21 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //Button add data from NYT or Giphy
-$(".btn").on("click", function(event) {
+$(document).on("click", '.gif', function(event) {
   event.preventDefault();
+  console.log("hello2" + headline1);
 
   // Grabs input from // for NYT and Giphy classes Need Gihpy html tags ids?
   // var nytData= $(".list-group-heading").val().trim();
   // var giphyData = $(".giphyHoldingPlace").val().trim();
 
+  console.log("hello" + event);
+  imgURL = event.currentTarget.getAttribute("src");
 
   // Creates local "temporary" object for holding the data from Giphy and NYT 
   var newObject = {
     nytHeadline: headline1,
-   //giphyPics: giphyData,
+    giphyPics: imgURL,
   };
 
   //uploads newObject data to the firebase db
@@ -120,6 +129,7 @@ database.ref().on("child_added", function(childSnapshot) {
 
   // Store everything into a variable.
   var fireNytData = childSnapshot.val().nytHeadline;
+  var fireGiphData = childSnapshot.val().giphyPics;
   // var fireGiphyData = childSnapshot.val().giphyPics;
 
   // console.log test return of GiphyData
@@ -127,6 +137,9 @@ database.ref().on("child_added", function(childSnapshot) {
 
   //Put back on Html to html  
   $(".list-group-item-text").text(fireNytData);
-
-
+  $(".gifimage").html(fireGiphData);
+  var newsGif = $("<img class='card-img-top gif'>").attr({
+    src: fireGiphData 
+  });
+  $("#work").prepend(newsGif);
 });
