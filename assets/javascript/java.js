@@ -72,9 +72,22 @@ $(document).ready(function () {
 
 $(document).on('click', '.btn', function () {
   headline1 = $(this).text();
+  $("#giphyContainer").remove();
+  var newGiphyDiplay = $("<div class='container' id='giphyContainer'>" +
+      "<div class='row'>" +
+      "<div class='col-lg-4 card' id='giphyContainer1'></div>" +
+      "<div class='col-lg-4 card' id='giphyContainer2'></div>" +
+      "<div class='col-lg-4 card' id='giphyContainer3'></div>" +
+      "</div>" +
+      "<div class='row'>" +
+      "<div class='col-lg-4 card' id='giphyContainer4'></div>" +
+      "<div class='col-lg-4 card' id='giphyContainer5'></div>" +
+      "<div class='col-lg-4 card' id='giphyContainer6'></div>" +
+      "</div>" +
+      "</div>");
+  $(this).append(newGiphyDiplay);
   console.log(headline1);
   getGiphys(headline1);
-
 });
 
 // $(document).on('click', '.gif', function (e) {
