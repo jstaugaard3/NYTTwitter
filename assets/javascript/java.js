@@ -137,7 +137,7 @@ $(document).on("click", '.gif', function(event) {
 
 //Create a firebase event pull DB and adding to html
  
-database.ref().endAt().limitToLast(1).on("child_added", function(childSnapshot) {
+database.ref().endAt().limitToLast(5).on("child_added", function(childSnapshot) {
   console.log(childSnapshot.val());
 
 //  if there are six childern remove the last child
