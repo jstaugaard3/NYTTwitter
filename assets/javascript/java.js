@@ -137,8 +137,14 @@ $(document).on("click", '.gif', function(event) {
 
 //Create a firebase event pull DB and adding to html
  
-database.ref().on("child_added", function(childSnapshot) {
+database.ref().endAt().limitToLast(1).on("child_added", function(childSnapshot) {
   console.log(childSnapshot.val());
+
+//  if there are six childern remove the last child
+
+
+
+
 
   // Store everything into a variable.
   var fireNytData = childSnapshot.val().nytHeadline;
@@ -154,5 +160,11 @@ database.ref().on("child_added", function(childSnapshot) {
   var newsGif = $("<img class='card-img-top gif mb-2'>").attr({
     src: fireGiphData 
   });
+ 
+  var count = $("#work").children().length;
+  console.log("childerncounter" + count);
+  if(count >= 5) {
+    $("#work").children().last().remove()
+  }
   $("#work").prepend(newsGif);
 });
