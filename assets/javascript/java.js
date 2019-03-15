@@ -75,14 +75,14 @@ $(document).on('click', '.btn', function () {
   $("#giphyContainer").remove();
   var newGiphyDiplay = $("<div class='container' id='giphyContainer'>" +
       "<div class='row'>" +
-      "<div class='col-lg-4 card' id='giphyContainer1'></div>" +
-      "<div class='col-lg-4 card' id='giphyContainer2'></div>" +
-      "<div class='col-lg-4 card' id='giphyContainer3'></div>" +
+      "<div class='col-lg-4 card insideGif' id='giphyContainer1'></div>" +
+      "<div class='col-lg-4 card insideGif' id='giphyContainer2'></div>" +
+      "<div class='col-lg-4 card insideGif' id='giphyContainer3'></div>" +
       "</div>" +
       "<div class='row'>" +
-      "<div class='col-lg-4 card' id='giphyContainer4'></div>" +
-      "<div class='col-lg-4 card' id='giphyContainer5'></div>" +
-      "<div class='col-lg-4 card' id='giphyContainer6'></div>" +
+      "<div class='col-lg-4 card insideGif' id='giphyContainer4'></div>" +
+      "<div class='col-lg-4 card insideGif' id='giphyContainer5'></div>" +
+      "<div class='col-lg-4 card insideGif' id='giphyContainer6'></div>" +
       "</div>" +
       "</div>");
   $(this).append(newGiphyDiplay);
@@ -151,7 +151,7 @@ database.ref().on("child_added", function(childSnapshot) {
   //Put back on Html to html  
   $(".list-group-item-text").text(fireNytData);
   $(".gifimage").html(fireGiphData);
-  var newsGif = $("<img class='card-img-top gif'>").attr({
+  var newsGif = $("<img class='card-img-top gif mb-2'>").attr({
     src: fireGiphData 
   });
   $("#work").prepend(newsGif);
