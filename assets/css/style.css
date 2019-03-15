@@ -21,4 +21,17 @@ body {
 .insideGif {
     background-color: #cae4db;
 }
-
+footer {
+    margin-top: 80px;
+    position: fixed;
+    left: 0;
+   bottom: 0;
+   width: 100%;
+   color:black;
+   text-align: center;
+   background-color: #daa520; 
+  }
+#work{
+    overflow: auto;
+    height: 650px;
+}
