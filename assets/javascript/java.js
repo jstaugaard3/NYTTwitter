@@ -17,7 +17,6 @@ function buildQueryURL() {
 //getArticles.  Articles returned in 'response' object
 function getArticles() {
     var queryURL = buildQueryURL();
-    console.log("getArticles : " + queryURL);
 
     $.ajax({
         url: queryURL,
@@ -86,14 +85,8 @@ $(document).on('click', '.btn', function () {
       "</div>" +
       "</div>");
   $(this).append(newGiphyDiplay);
-  console.log(headline1);
   getGiphys(headline1);
 });
-
-// $(document).on('click', '.gif', function (e) {
-//   console.log(e.currentTarget.getAttribute("src"));
-
-// });
 
  // Initialize Firebase
  var config = {
@@ -108,63 +101,41 @@ $(document).on('click', '.btn', function () {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-//Button add data from NYT or Giphy
+// On click event to get imgURL of Giphy, create a new object, and send Obj to firebase
 $(document).on("click", '.gif', function(event) {
   event.preventDefault();
-  console.log("hello2" + headline1);
 
-  // Grabs input from // for NYT and Giphy classes Need Gihpy html tags ids?
-  // var nytData= $(".list-group-heading").val().trim();
-  // var giphyData = $(".giphyHoldingPlace").val().trim();
-
-  console.log("hello" + event);
+  //New variable using onclick event to grab giphy url only
   imgURL = event.currentTarget.getAttribute("src");
 
-  // Creates local "temporary" object for holding the data from Giphy and NYT 
+  // Creates local object for holding the data from Giphy imgURL
   var newObject = {
-    nytHeadline: headline1,
     giphyPics: imgURL,
   };
 
   //uploads newObject data to the firebase db
   database.ref().push(newObject);
 
-  //console log everyting to the console 
-  console.log(newObject);
-
 });
 
 
 //Create a firebase event pull DB and adding to html
- 
+//limits the amount of children to pull from firebase on pageload to 5 
 database.ref().endAt().limitToLast(5).on("child_added", function(childSnapshot) {
-  console.log(childSnapshot.val());
 
-//  if there are six childern remove the last child
-
-
-
-
-
-  // Store everything into a variable.
-  var fireNytData = childSnapshot.val().nytHeadline;
+  // Storing the Key from the firebase object with the Giphy imgURL called giphyPics
   var fireGiphData = childSnapshot.val().giphyPics;
-  // var fireGiphyData = childSnapshot.val().giphyPics;
 
-  // console.log test return of GiphyData
-  console.log(fireNytData);
-
-  //Put back on Html to html  
-  $(".list-group-item-text").text(fireNytData);
-  $(".gifimage").html(fireGiphData);
+  //sets a new variable to the img class using the attribute of the Firebase return variable fireGiphData
   var newsGif = $("<img class='card-img-top gif mb-2'>").attr({
     src: fireGiphData 
   });
- 
+  //creates a variable that counts the length of all the children objects returned from firebase
   var count = $("#work").children().length;
-  console.log("childerncounter" + count);
+  //logic to remove any children equal or greater than 5 to allow only show 5 images at all times
   if(count >= 5) {
     $("#work").children().last().remove()
   }
+  //Prepends the newsGif variable to the work ID
   $("#work").prepend(newsGif);
 });
