@@ -8,7 +8,7 @@ function buildQueryURL() {
     //Query build for NYTimes API.  Parameters commented out are for follow on development
     //after building MVP
 
-    var queryURL = "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?";
+    var queryURL = "https://api.nytimes.com/svc/topstories/v2/politics.json?";
     var queryParams = { "api-key": "76MLUOUhu8ALZ2Y8BCj6gA5pGcglP951" };
 
     return queryURL + $.param(queryParams);
